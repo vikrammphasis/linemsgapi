@@ -2,6 +2,7 @@ package com.vikram.linemsgapi.controller;
 
 import static java.util.Collections.singletonList;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -73,6 +74,28 @@ public class LineMsgController {
 
 		log.info("Got text message from replyToken:{}: text:{} emojis:{}", replyToken, text, content.getEmojis());
 		switch (text) {
+		case "profile": {
+			log.info("Invoking 'profile' command: source:{}", event.getSource());
+			final String userId = event.getSource().getUserId();
+
+			lineMessagingClient.getProfile(userId).whenComplete((profile, throwable) -> {
+				if (throwable != null) {
+					this.reply(replyToken, Arrays.asList(new TextMessage(throwable.getMessage())), false);
+					return;
+				}
+
+				this.reply(replyToken, Arrays.asList(new TextMessage("Display name: " + profile.getDisplayName()),
+						new TextMessage("Status message: " + profile.getStatusMessage())), false);
+
+			});
+		}
+
+		case "bye": {
+
+			this.reply(replyToken, singletonList(new TextMessage("Bye for now")), false);
+
+			break;
+		}
 
 		default:
 			log.info("Returns echo message {}: {}", replyToken, text);
@@ -100,7 +123,7 @@ public class LineMsgController {
 		log.info("event: " + event);
 		TextMessageContent message = event.getMessage();
 		handleTextContent(event.getReplyToken(), event, message);
-		//final String originalMessageText = event.getMessage().getText();
+		// final String originalMessageText = event.getMessage().getText();
 		// return new TextMessage(originalMessageText);
 	}
 
