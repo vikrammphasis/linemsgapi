@@ -79,10 +79,10 @@ public class LineMsgController {
 			final String userId = event.getSource().getUserId();
 
 			lineMessagingClient.getProfile(userId).whenComplete((profile, throwable) -> {
-				if (throwable != null) {
-					this.reply(replyToken, Arrays.asList(new TextMessage(throwable.getMessage())), false);
-					return;
-				}
+//				if (throwable != null) {
+//					this.reply(replyToken, Arrays.asList(new TextMessage(throwable.getMessage())), false);
+//					return;
+//				}
 
 				this.reply(replyToken, Arrays.asList(new TextMessage("Display name: " + profile.getDisplayName()),
 						new TextMessage("Status message: " + profile.getStatusMessage())), false);
