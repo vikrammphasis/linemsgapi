@@ -224,4 +224,10 @@ public class SmoochIoController {
 
 		return "Dummy response, shouldn't see this";
 	}
+	
+//	@RequestMapping("/messages", HttpMethod.POST)
+//	public String smoochMessagesPostResponse(){
+//		
+//	}
+	
 }
