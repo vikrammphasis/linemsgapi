@@ -2,7 +2,9 @@ package com.vikram.linemsgapi.controller;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.zendesk.sunshine_conversations_client.ApiClient;
@@ -225,9 +227,11 @@ public class SmoochIoController {
 		return "Dummy response, shouldn't see this";
 	}
 	
-//	@RequestMapping("/messages", HttpMethod.POST)
-//	public String smoochMessagesPostResponse(){
-//		
-//	}
+	@RequestMapping(value="/smoochwebhook", method = RequestMethod.POST)
+	public String smoochMessagesPostResponse(@RequestBody Object body){
+		
+		return body.toString();
+		
+	}
 	
 }
