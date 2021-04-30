@@ -230,7 +230,10 @@ public class SmoochIoController {
 	@RequestMapping(value="/smoochwebhook", method = RequestMethod.POST)
 	public String smoochMessagesPostResponse(@RequestBody Object body){
 		
-		return body.toString();
+		 System.out.println(body.toString());
+		 System.out.println(body.getClass().getCanonicalName());
+		 
+		 return "Message received in spring boot appliation";
 		
 	}
 	
