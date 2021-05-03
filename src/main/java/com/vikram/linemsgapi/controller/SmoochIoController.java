@@ -1,6 +1,9 @@
 package com.vikram.linemsgapi.controller;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -232,6 +235,27 @@ public class SmoochIoController {
 		
 		 System.out.println(body.toString());
 		 System.out.println(body.getClass().getCanonicalName());
+		 
+		 LinkedHashMap<String, String> lhm = (LinkedHashMap<String, String>)body;
+		 ArrayList<String> keys = new ArrayList<>(lhm.keySet());
+		 
+		 System.out.println("keys " + keys);
+		 
+		 List<String> list = new ArrayList<>();
+		 
+		// Add the values to a list
+	        for (Map.Entry<String, String> i :
+	             lhm.entrySet()) {
+	            list.add(i.getValue());
+	        }
+	  
+	        System.out.println("values : " + list);
+		 
+		 
+		 
+		 
+		 
+		 
 		 
 		 return "Message received in spring boot appliation";
 		
