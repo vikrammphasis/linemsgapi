@@ -20,6 +20,7 @@ import com.zendesk.sunshine_conversations_client.api.ParticipantsApi;
 import com.zendesk.sunshine_conversations_client.api.UsersApi;
 import com.zendesk.sunshine_conversations_client.api.WebhooksApi;
 import com.zendesk.sunshine_conversations_client.auth.HttpBasicAuth;
+import com.zendesk.sunshine_conversations_client.model.Author;
 import com.zendesk.sunshine_conversations_client.model.ConversationListFilter;
 import com.zendesk.sunshine_conversations_client.model.ConversationListResponse;
 import com.zendesk.sunshine_conversations_client.model.Integration;
@@ -298,7 +299,13 @@ public class SmoochIoController {
 				TextMessage tm = new TextMessage();
 				tm.setType("text");
 				tm.setText(("Your message was [" + text + ". Thank you for messaging"));
+				
+				
+				Author a = new Author();
+				a.setType(Author.TypeEnum.BUSINESS);
+				
 				messagePost.setContent(tm);
+				messagePost.author(a);
 
 				System.out.println("\n");
 				try {
