@@ -230,12 +230,17 @@ public class SmoochIoController {
 
 	@RequestMapping(value = "/smoochwebhook", method = RequestMethod.POST)
 	public String smoochMessagesPostResponse(@RequestBody String body) {
-		
+
 		String appId = "607fa87b17ccf300d3bbf7ec"; // String | Identifies the
 		// app.
-		
+
 		ApiClient defaultClient = Configuration.getDefaultApiClient();
 		defaultClient.setBasePath("https://api.smooch.io");
+
+		// Configure HTTP basic authorization: basicAuth
+		HttpBasicAuth basicAuth = (HttpBasicAuth) defaultClient.getAuthentication("basicAuth");
+		basicAuth.setUsername("app_607faf3e7db9a300d3ee3ef9");
+		basicAuth.setPassword("s72ROpgwUCjih2dyGr3_maCEqTkZ984mX7J4LGQNNRjQnO8RdHp-p8QOl2VH2j4O4qhrTUDuvcYIfLy0o-sIHg");
 
 		System.out.println(body.toString());
 		System.out.println(body.getClass().getCanonicalName());
@@ -265,37 +270,36 @@ public class SmoochIoController {
 			// Store the JSON object in JSON array as objects (For level 1 array
 			// element i.e events)
 			JSONArray jsonarr_1 = (JSONArray) jobj.get("events");
-			
+
 			System.out.println("jsonarr_1.size()" + jsonarr_1.size());
 			// Get data for Results array
 			for (int i = 0; i < jsonarr_1.size(); i++) {
 				JSONObject jsonobj_1 = (JSONObject) jsonarr_1.get(i);
 				System.out.println("\n Payload : " + jsonobj_1.get("payload"));
-				
-				JSONObject jsonobj_2 = (JSONObject)jsonobj_1.get("payload");
-				System.out.println("\n conversation: " +jsonobj_2.get("conversation"));
-				
-				JSONObject jsonobj_3 = (JSONObject)jsonobj_2.get("conversation");
+
+				JSONObject jsonobj_2 = (JSONObject) jsonobj_1.get("payload");
+				System.out.println("\n conversation: " + jsonobj_2.get("conversation"));
+
+				JSONObject jsonobj_3 = (JSONObject) jsonobj_2.get("conversation");
 				String id = (String) jsonobj_3.get("id");
 				System.out.println("\n conversation id to be used  : " + id);
-				
-				
-				JSONObject jsonobj_4 = (JSONObject)jsonobj_2.get("message");
-				JSONObject jsonobj_5  = (JSONObject) jsonobj_4.get("content");
-				String text  = (String) jsonobj_5.get("text");
+
+				JSONObject jsonobj_4 = (JSONObject) jsonobj_2.get("message");
+				JSONObject jsonobj_5 = (JSONObject) jsonobj_4.get("content");
+				String text = (String) jsonobj_5.get("text");
+
 				MessagesApi messagesApi = new MessagesApi(defaultClient);
 				MessagePost messagePost = new MessagePost(); // MessagePost |
 
-				//start the conversation response
+				// start the conversation response
 				String conversationId = id;
-				
-				//prepate the text message
+
+				// prepate the text message
 				TextMessage tm = new TextMessage();
 				tm.setType("text");
 				tm.setText(("Your message was [" + text + ". Thank you for messaging"));
 				messagePost.setContent(tm);
 
-				
 				System.out.println("\n");
 				try {
 					MessagePostResponse result = messagesApi.postMessage(messagePost, appId, conversationId);
