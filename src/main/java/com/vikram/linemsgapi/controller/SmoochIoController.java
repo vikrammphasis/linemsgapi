@@ -241,16 +241,12 @@ public class SmoochIoController {
 		 
 		 System.out.println("keys " + keys);
 		 
-		 List<String> list = new ArrayList<>();
+		 Object events = lhm.get("events");
 		 
-		// Add the values to a list
-	        for (Map.Entry<String, String> i :
-	             lhm.entrySet()) {
-	            list.add(i.getValue());
-	        }
+		
 	  
-	        System.out.println("values : " + list);
-		 
+	        System.out.println("events : " + events);
+	        System.out.println("events : " + events.getClass().getCanonicalName());		 
 		 
 		 
 		 
