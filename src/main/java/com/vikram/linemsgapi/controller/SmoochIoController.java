@@ -2,9 +2,6 @@ package com.vikram.linemsgapi.controller;
 
 import java.util.List;
 
-import org.json.JSONObject;
-import org.json.simple.JSONArray;
-import org.json.simple.parser.JSONParser;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -252,7 +249,7 @@ public class SmoochIoController {
 	     
 	     
 	     
-		 try {
+		/* try {
 		//JSONParser reads the data from string object and break each data into key value pairs
 			JSONParser parse = new JSONParser();
 			//Type caste the parsed json data in json object
@@ -263,14 +260,14 @@ public class SmoochIoController {
 			for(int i=0;i<jsonarr_1.size();i++)
 			{
 				JSONObject jsonobj_1 = (JSONObject)jsonarr_1.get(i);
-				System.out.println("\nConversation : " +jsonobj_1.get("conversation="));
+				System.out.println("\nConversation : " +jsonobj_1.get("conversation"));
 			}
 			
 		 }catch(Exception e){
 			 
-		 }
+		 }*/
 		 
-		 
+		 System.out.println(body.substring(body.indexOf("conversation") +6 , body.indexOf(", type=personal")));
 		 
 		 
 		 
