@@ -256,12 +256,20 @@ public class SmoochIoController {
 			// Type caste the parsed json data in json object
 			JSONObject jobj = (JSONObject) parse.parse(body);
 			// Store the JSON object in JSON array as objects (For level 1 array
-			// element i.e Results)
+			// element i.e events)
 			JSONArray jsonarr_1 = (JSONArray) jobj.get("events");
+			
+			System.out.println("jsonarr_1.size()" + jsonarr_1.size());
 			// Get data for Results array
 			for (int i = 0; i < jsonarr_1.size(); i++) {
 				JSONObject jsonobj_1 = (JSONObject) jsonarr_1.get(i);
-				System.out.println("\nConversation : " + jsonobj_1.get("conversation"));
+				System.out.println("\n Payload : " + jsonobj_1.get("payload"));
+				
+				JSONObject jsonobj_2 = (JSONObject)jsonobj_1.get("payload");
+				System.out.println("\n conversation: " +jsonobj_2.get("conversation"));
+				
+				JSONObject jsonobj_3 = (JSONObject)jsonobj_1.get("conversation");
+				System.out.println("\n conversation: " +jsonobj_3.get("id"));
 			}
 
 		} catch (Exception e) {
