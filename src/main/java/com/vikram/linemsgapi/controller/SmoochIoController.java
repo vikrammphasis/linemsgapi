@@ -28,6 +28,7 @@ import com.zendesk.sunshine_conversations_client.model.IntegrationListResponse;
 import com.zendesk.sunshine_conversations_client.model.MessagePost;
 import com.zendesk.sunshine_conversations_client.model.MessagePostResponse;
 import com.zendesk.sunshine_conversations_client.model.Page;
+import com.zendesk.sunshine_conversations_client.model.TextMessage;
 import com.zendesk.sunshine_conversations_client.model.UserResponse;
 import com.zendesk.sunshine_conversations_client.model.WebhookCreateBody;
 import com.zendesk.sunshine_conversations_client.model.WebhookListResponse;
@@ -229,6 +230,12 @@ public class SmoochIoController {
 
 	@RequestMapping(value = "/smoochwebhook", method = RequestMethod.POST)
 	public String smoochMessagesPostResponse(@RequestBody String body) {
+		
+		String appId = "607fa87b17ccf300d3bbf7ec"; // String | Identifies the
+		// app.
+		
+		ApiClient defaultClient = Configuration.getDefaultApiClient();
+		defaultClient.setBasePath("https://api.smooch.io");
 
 		System.out.println(body.toString());
 		System.out.println(body.getClass().getCanonicalName());
@@ -271,6 +278,35 @@ public class SmoochIoController {
 				JSONObject jsonobj_3 = (JSONObject)jsonobj_2.get("conversation");
 				String id = (String) jsonobj_3.get("id");
 				System.out.println("\n conversation id to be used  : " + id);
+				
+				
+				JSONObject jsonobj_4 = (JSONObject)jsonobj_2.get("message");
+				JSONObject jsonobj_5  = (JSONObject) jsonobj_4.get("content");
+				String text  = (String) jsonobj_5.get("text");
+				MessagesApi messagesApi = new MessagesApi(defaultClient);
+				MessagePost messagePost = new MessagePost(); // MessagePost |
+
+				//start the conversation response
+				String conversationId = id;
+				
+				//prepate the text message
+				TextMessage tm = new TextMessage();
+				tm.setType("text");
+				tm.setText(("Your message was [" + text + ". Thank you for messaging"));
+				messagePost.setContent(tm);
+
+				
+				System.out.println("\n");
+				try {
+					MessagePostResponse result = messagesApi.postMessage(messagePost, appId, conversationId);
+					System.out.println(result);
+				} catch (ApiException e) {
+					System.err.println("Exception when calling MessagesApi#postMessage");
+					System.err.println("Status code: " + e.getCode());
+					System.err.println("Reason: " + e.getResponseBody());
+					System.err.println("Response headers: " + e.getResponseHeaders());
+					// e.printStackTrace();
+				}
 			}
 
 		} catch (Exception e) {
