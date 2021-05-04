@@ -298,7 +298,7 @@ public class SmoochIoController {
 				// prepate the text message
 				TextMessage tm = new TextMessage();
 				tm.setType("text");
-				tm.setText(("Your message was [" + text + ". Thank you for messaging"));
+				tm.setText(("Your message was [" + text + "]. Thank you for messaging"));
 
 				Author a = new Author();
 				a.setType(Author.TypeEnum.BUSINESS);
