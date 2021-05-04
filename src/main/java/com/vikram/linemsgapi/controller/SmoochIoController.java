@@ -266,8 +266,8 @@ public class SmoochIoController {
 		 }catch(Exception e){
 			 
 		 }*/
-		 
-		 System.out.println(body.substring(body.indexOf("conversation") +6 , body.indexOf(", type=personal")));
+		 String payload = body.substring(body.indexOf("payload"));
+		 System.out.println(body.substring(body.indexOf("id") + 4 , body.indexOf("type")));
 		 
 		 
 		 
