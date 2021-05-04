@@ -299,24 +299,26 @@ public class SmoochIoController {
 				TextMessage tm = new TextMessage();
 				tm.setType("text");
 				tm.setText(("Your message was [" + text + ". Thank you for messaging"));
-				
-				
+
 				Author a = new Author();
 				a.setType(Author.TypeEnum.BUSINESS);
-				
+
 				messagePost.setContent(tm);
 				messagePost.author(a);
 
 				System.out.println("\n");
-				try {
-					MessagePostResponse result = messagesApi.postMessage(messagePost, appId, conversationId);
-					System.out.println(result);
-				} catch (ApiException e) {
-					System.err.println("Exception when calling MessagesApi#postMessage");
-					System.err.println("Status code: " + e.getCode());
-					System.err.println("Reason: " + e.getResponseBody());
-					System.err.println("Response headers: " + e.getResponseHeaders());
-					// e.printStackTrace();
+
+				if (!text.startsWith("Your message was")) {
+					try {
+						MessagePostResponse result = messagesApi.postMessage(messagePost, appId, conversationId);
+						System.out.println(result);
+					} catch (ApiException e) {
+						System.err.println("Exception when calling MessagesApi#postMessage");
+						System.err.println("Status code: " + e.getCode());
+						System.err.println("Reason: " + e.getResponseBody());
+						System.err.println("Response headers: " + e.getResponseHeaders());
+						// e.printStackTrace();
+					}
 				}
 			}
 
