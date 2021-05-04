@@ -1,10 +1,9 @@
 package com.vikram.linemsgapi.controller;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -231,22 +230,38 @@ public class SmoochIoController {
 	}
 	
 	@RequestMapping(value="/smoochwebhook", method = RequestMethod.POST)
-	public String smoochMessagesPostResponse(@RequestBody Object body){
+	public String smoochMessagesPostResponse(@RequestBody String body){
 		
 		 System.out.println(body.toString());
 		 System.out.println(body.getClass().getCanonicalName());
 		 
-		 LinkedHashMap<String, String> lhm = (LinkedHashMap<String, String>)body;
-		 ArrayList<String> keys = new ArrayList<>(lhm.keySet());
-		 
-		 System.out.println("keys " + keys);
-		 
-		 Object events = lhm.get("events");
-		 
-		
-	  
-	        System.out.println("events : " + events);
-	        System.out.println("events : " + events.getClass().getCanonicalName());		 
+//		 LinkedHashMap<String, Object> lhm = (LinkedHashMap<String, Object>)body;
+//		 ArrayList<String> keys = new ArrayList<>(lhm.keySet());
+//		 
+//		 System.out.println("keys " + keys);
+//		 
+//		 ArrayList events = (ArrayList)lhm.get("events");
+//		 
+//		
+//	  
+//	        System.out.println("events : " + events);
+//	        System.out.println("events : " + events.getClass().getCanonicalName());
+//	        
+//	     Object firstevent = events.get(0);
+	     
+	     
+	     
+	     try {
+			JSONObject jsonObj=new JSONObject(body.toString());
+			
+			String events=jsonObj.getString("events");
+			
+			JSONObject eventsjson =new JSONObject(events);
+			System.out.println(eventsjson);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		 
 		 
 		 
