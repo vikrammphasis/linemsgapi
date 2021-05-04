@@ -267,7 +267,7 @@ public class SmoochIoController {
 			 
 		 }*/
 		 String payload = body.substring(body.indexOf("payload"));
-		 System.out.println(body.substring(body.indexOf("id") + 4 , body.indexOf("type")));
+		 System.out.println(body.substring(payload.indexOf("id") + 4 , payload.indexOf("type")));
 		 
 		 
 		 
