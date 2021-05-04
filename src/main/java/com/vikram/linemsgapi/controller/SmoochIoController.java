@@ -2,6 +2,9 @@ package com.vikram.linemsgapi.controller;
 
 import java.util.List;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -80,11 +83,11 @@ public class SmoochIoController {
 			System.err.println("Status code: " + e.getCode());
 			System.err.println("Reason: " + e.getResponseBody());
 			System.err.println("Response headers: " + e.getResponseHeaders());
-			//e.printStackTrace();
+			// e.printStackTrace();
 		}
 
 		for (Integration eachintegration : allintegrations) {
-			
+
 			System.out.println("============================================================");
 			System.out.println("============================================================");
 			System.out.println("============================================================");
@@ -94,9 +97,8 @@ public class SmoochIoController {
 			// The id of the integration.
 
 			// Line
-			//String integrationId = "60814e66b8346800d4066634";
+			// String integrationId = "60814e66b8346800d4066634";
 
-			
 			String integrationId = eachintegration.getId();
 
 			System.out.println("Integration Details");
@@ -105,8 +107,7 @@ public class SmoochIoController {
 			System.out.println(eachintegration.getType());
 			System.out.println(eachintegration.getDisplayName_JsonNullable());
 			System.out.println("---------------------------------------------");
-			
-			
+
 			System.out.println("\n");
 			WebhooksApi webhooksApi = new WebhooksApi(defaultClient);
 			// Add required body parameters
@@ -123,7 +124,7 @@ public class SmoochIoController {
 				System.err.println("Status code: " + e.getCode());
 				System.err.println("Reason: " + e.getResponseBody());
 				System.err.println("Response headers: " + e.getResponseHeaders());
-				//e.printStackTrace();
+				// e.printStackTrace();
 			}
 
 			System.out.println("\n");
@@ -135,7 +136,7 @@ public class SmoochIoController {
 				System.err.println("Status code: " + e.getCode());
 				System.err.println("Reason: " + e.getResponseBody());
 				System.err.println("Response headers: " + e.getResponseHeaders());
-				//e.printStackTrace();
+				// e.printStackTrace();
 			}
 
 			UsersApi usersapi = new UsersApi(defaultClient);
@@ -156,7 +157,7 @@ public class SmoochIoController {
 				System.err.println("Status code: " + e.getCode());
 				System.err.println("Reason: " + e.getResponseBody());
 				System.err.println("Response headers: " + e.getResponseHeaders());
-				//e.printStackTrace();
+				// e.printStackTrace();
 			}
 
 			ConversationsApi conversationsApi = new ConversationsApi(defaultClient);
@@ -185,7 +186,7 @@ public class SmoochIoController {
 				System.err.println("Status code: " + e.getCode());
 				System.err.println("Reason: " + e.getResponseBody());
 				System.err.println("Response headers: " + e.getResponseHeaders());
-				//e.printStackTrace();
+				// e.printStackTrace();
 			}
 
 			//
@@ -205,75 +206,74 @@ public class SmoochIoController {
 			// //e.printStackTrace();
 			// }
 
-			
 			MessagesApi messagesApi = new MessagesApi(defaultClient);
-	        MessagePost messagePost = new MessagePost(); // MessagePost | 
-	        
-	        String conversationId = "";
+			MessagePost messagePost = new MessagePost(); // MessagePost |
 
-	        System.out.println("\n");
-	        try {
-	            MessagePostResponse result = messagesApi.postMessage(messagePost, appId, conversationId);
-	            System.out.println(result);
-	        } catch (ApiException e) {
-	            System.err.println("Exception when calling MessagesApi#postMessage");
-	            System.err.println("Status code: " + e.getCode());
-	            System.err.println("Reason: " + e.getResponseBody());
-	            System.err.println("Response headers: " + e.getResponseHeaders());
-	            //e.printStackTrace();
-	        }
+			String conversationId = "";
+
+			System.out.println("\n");
+			try {
+				MessagePostResponse result = messagesApi.postMessage(messagePost, appId, conversationId);
+				System.out.println(result);
+			} catch (ApiException e) {
+				System.err.println("Exception when calling MessagesApi#postMessage");
+				System.err.println("Status code: " + e.getCode());
+				System.err.println("Reason: " + e.getResponseBody());
+				System.err.println("Response headers: " + e.getResponseHeaders());
+				// e.printStackTrace();
+			}
 		}
 
 		return "Dummy response, shouldn't see this";
 	}
-	
-	@RequestMapping(value="/smoochwebhook", method = RequestMethod.POST)
-	public String smoochMessagesPostResponse(@RequestBody String body){
-		
-		 System.out.println(body.toString());
-		 System.out.println(body.getClass().getCanonicalName());
-		 
-//		 LinkedHashMap<String, Object> lhm = (LinkedHashMap<String, Object>)body;
-//		 ArrayList<String> keys = new ArrayList<>(lhm.keySet());
-//		 
-//		 System.out.println("keys " + keys);
-//		 
-//		 ArrayList events = (ArrayList)lhm.get("events");
-//		 
-//		
-//	  
-//	        System.out.println("events : " + events);
-//	        System.out.println("events : " + events.getClass().getCanonicalName());
-//	        
-//	     Object firstevent = events.get(0);
-	     
-	     
-	     
-		/* try {
-		//JSONParser reads the data from string object and break each data into key value pairs
+
+	@RequestMapping(value = "/smoochwebhook", method = RequestMethod.POST)
+	public String smoochMessagesPostResponse(@RequestBody String body) {
+
+		System.out.println(body.toString());
+		System.out.println(body.getClass().getCanonicalName());
+
+		// LinkedHashMap<String, Object> lhm = (LinkedHashMap<String,
+		// Object>)body;
+		// ArrayList<String> keys = new ArrayList<>(lhm.keySet());
+		//
+		// System.out.println("keys " + keys);
+		//
+		// ArrayList events = (ArrayList)lhm.get("events");
+		//
+		//
+		//
+		// System.out.println("events : " + events);
+		// System.out.println("events : " +
+		// events.getClass().getCanonicalName());
+		//
+		// Object firstevent = events.get(0);
+
+		try {
+			// JSONParser reads the data from string object and break each data
+			// into key value pairs
 			JSONParser parse = new JSONParser();
-			//Type caste the parsed json data in json object
-			JSONObject jobj = (JSONObject)parse.parse(body);
-			//Store the JSON object in JSON array as objects (For level 1 array element i.e Results)
+			// Type caste the parsed json data in json object
+			JSONObject jobj = (JSONObject) parse.parse(body);
+			// Store the JSON object in JSON array as objects (For level 1 array
+			// element i.e Results)
 			JSONArray jsonarr_1 = (JSONArray) jobj.get("events");
-			//Get data for Results array
-			for(int i=0;i<jsonarr_1.size();i++)
-			{
-				JSONObject jsonobj_1 = (JSONObject)jsonarr_1.get(i);
-				System.out.println("\nConversation : " +jsonobj_1.get("conversation"));
+			// Get data for Results array
+			for (int i = 0; i < jsonarr_1.size(); i++) {
+				JSONObject jsonobj_1 = (JSONObject) jsonarr_1.get(i);
+				System.out.println("\nConversation : " + jsonobj_1.get("conversation"));
 			}
-			
-		 }catch(Exception e){
-			 
-		 }*/
-		 String payload = body.substring(body.indexOf("payload"));
-		 System.out.println(body.substring(payload.indexOf("id") + 4 , payload.indexOf("type")));
-		 
-		 
-		 
-		 
-		 return "Message received in spring boot appliation";
-		
+
+		} catch (Exception e) {
+
+		}
+		// String payload = body.substring(body.indexOf("payload"));
+		// System.out.println(body.substring(payload.indexOf("id") + 4 ,
+		// payload.indexOf("type")));
+		//
+
+		return "Message received in spring boot appliation";
+
 	}
-	
+
 }
