@@ -269,7 +269,8 @@ public class SmoochIoController {
 				System.out.println("\n conversation: " +jsonobj_2.get("conversation"));
 				
 				JSONObject jsonobj_3 = (JSONObject)jsonobj_2.get("conversation");
-				System.out.println("\n conversation id to be used  : " +jsonobj_3.get("id"));
+				String id = (String) jsonobj_3.get("id");
+				System.out.println("\n conversation id to be used  : " + id);
 			}
 
 		} catch (Exception e) {
