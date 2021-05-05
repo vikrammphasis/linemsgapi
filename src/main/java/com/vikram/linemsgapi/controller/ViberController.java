@@ -54,6 +54,7 @@ public class ViberController {
 	@RequestMapping(value = "/viberwebhook", method = RequestMethod.POST)
 	public String smoochMessagesPostResponse(@RequestBody String body) {
 		
+		System.out.println(body.toString());
 		return "Webhook working";
 	}
 	
