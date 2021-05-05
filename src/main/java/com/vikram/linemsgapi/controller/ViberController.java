@@ -70,7 +70,7 @@ public class ViberController {
 			String senderid = (String) jsonobj_1.get("id");
 			
 			JSONObject jsonobj_2 = (JSONObject) jobj.get("message");
-			String text = (String) jsonobj_1.get("text");
+			String text = (String) jsonobj_2.get("text");
 			
 			RestTemplate restTemplate = new RestTemplate();
 			HttpHeaders headers = new HttpHeaders();
