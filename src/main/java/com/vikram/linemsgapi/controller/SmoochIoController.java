@@ -1,14 +1,19 @@
 package com.vikram.linemsgapi.controller;
 
+import java.net.URI;
 import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.zendesk.sunshine_conversations_client.ApiClient;
 import com.zendesk.sunshine_conversations_client.ApiException;
@@ -331,6 +336,43 @@ public class SmoochIoController {
 		//
 
 		return "Message received in spring boot appliation";
+
+	}
+
+	@RequestMapping(value = "/smoochiowhatsapptest")
+	public String testwhatsappapi() {
+
+		String updatePersonUrl = "https://api.smooch.io/v1.1/apps/607fa87b17ccf300d3bbf7ec/notifications";
+
+		RestTemplate restTemplate = new RestTemplate();
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.setBasicAuth("app_607faf3e7db9a300d3ee3ef9",
+				"s72ROpgwUCjih2dyGr3_maCEqTkZ984mX7J4LGQNNRjQnO8RdHp-p8QOl2VH2j4O4qhrTUDuvcYIfLy0o-sIHg");
+
+		JSONObject destinationObject = new JSONObject();
+		destinationObject.put("integrationId", "6091892e502acf00d353e576");
+		destinationObject.put("destinationId", "+91.......");
+
+		JSONObject authorObject = new JSONObject();
+		authorObject.put("role", "appMaker");
+
+		JSONObject messageObject = new JSONObject();
+		messageObject.put("type", "text");
+		messageObject.put("text", "Sample notification message");
+
+		JSONObject requestJsonObject = new JSONObject();
+		requestJsonObject.put("destination", destinationObject);
+		requestJsonObject.put("author", authorObject);
+		requestJsonObject.put("message", messageObject);
+
+		HttpEntity<String> request = new HttpEntity<String>(requestJsonObject.toString(), headers);
+		URI locationHeader = restTemplate.postForLocation(updatePersonUrl, request);
+
+		System.out.println("locationHeader in notification api");
+		System.out.println(locationHeader);
+
+		return "";
 
 	}
 
