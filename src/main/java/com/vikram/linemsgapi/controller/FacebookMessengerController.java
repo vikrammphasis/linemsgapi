@@ -63,7 +63,7 @@ public class FacebookMessengerController {
 			for (int i = 0; i < jsonarr_1.size(); i++) {
 				JSONObject jsonobj_1 = (JSONObject) jsonarr_1.get(i);
 
-				JSONArray jsonarr_2 = (JSONArray) jobj.get("messaging");
+				JSONArray jsonarr_2 = (JSONArray) jsonobj_1.get("messaging");
 				
 				System.out.println("jsonarr_2.size() " +jsonarr_2.size());
 
