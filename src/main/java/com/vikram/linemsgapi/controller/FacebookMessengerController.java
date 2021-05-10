@@ -56,9 +56,6 @@ public class FacebookMessengerController {
 
 			String object = (String) jobj.get("object");
 
-			JSONObject jsonobj_2 = (JSONObject) jobj.get("message");
-			String text = (String) jsonobj_2.get("text");
-
 			JSONArray jsonarr_1 = (JSONArray) jobj.get("entry");
 
 			System.out.println("jsonarr_1.size()" + jsonarr_1.size());
@@ -67,6 +64,8 @@ public class FacebookMessengerController {
 				JSONObject jsonobj_1 = (JSONObject) jsonarr_1.get(i);
 
 				JSONArray jsonarr_2 = (JSONArray) jobj.get("messaging");
+				
+				System.out.println("jsonarr_2.size() " +jsonarr_2.size());
 
 				if (jsonarr_2 != null && jsonarr_2.size() > 0) {
 
