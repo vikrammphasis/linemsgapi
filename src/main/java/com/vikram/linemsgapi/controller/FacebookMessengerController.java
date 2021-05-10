@@ -73,7 +73,7 @@ public class FacebookMessengerController {
 					
 					JSONObject jsonobj_3 = (JSONObject) jsonarr_2.get(0);
 					
-					JSONObject jsonobj_4 = (JSONObject)jsonobj_3.get("recipient");
+					JSONObject jsonobj_4 = (JSONObject)jsonobj_3.get("sender");
 	
 					JSONObject jsonobj_5 = (JSONObject)jsonobj_3.get("message");
 					String textfrommessage = (String) jsonobj_5.get("text");
@@ -96,6 +96,8 @@ public class FacebookMessengerController {
 				}
 			}
 		} catch (Exception e) {
+			
+			System.out.println(e.getMessage());
 
 		}
 
