@@ -17,7 +17,8 @@ public class FacebookMessengerController {
 		System.out.println("facebookwebhook GET body");
 		
 
-		return "";
+		//hub.challenge
+		return "132337777";
 	}
 
 	@RequestMapping(value = "/facebookwebhook", method = RequestMethod.POST)
