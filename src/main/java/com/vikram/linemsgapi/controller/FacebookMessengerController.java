@@ -91,7 +91,7 @@ public class FacebookMessengerController {
 					HttpEntity<String> request = new HttpEntity<String>(requestJsonObject.toString(), headers);
 					URI locationHeader = restTemplate.postForLocation(send_message_url, request);
 
-					System.out.println("locationHeader in viber webhook api");
+					System.out.println("locationHeader in facebook webhook api");
 					System.out.println(locationHeader);
 				}
 			}
