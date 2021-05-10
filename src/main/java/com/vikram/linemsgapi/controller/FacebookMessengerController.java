@@ -83,7 +83,7 @@ public class FacebookMessengerController {
 
 					JSONObject requestJsonObject = new JSONObject();
 					requestJsonObject.put("recipient", jsonobj_4);
-					requestJsonObject.put("messaging_type", "text");
+					requestJsonObject.put("messaging_type", "RESPONSE");
 					// requestJsonObject.put("sender", senderObject);
 					requestJsonObject.put("message", messageObject);
 
